@@ -1,12 +1,10 @@
 import { Stack, useRouter } from "expo-router";
 import { useState } from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, Text, View, Button, Image, TextInput } from "react-native";
 
 export default function Create() {
   const router = useRouter();
-  const [image, setImage] = useState(
-    "https://www.pulsecarshalton.co.uk/wp-content/uploads/2016/08/jk-placeholder-image.jpg"
-  );
+  const [image, setImage] = useState("https://i.imgur.com/X3ctv3i.jpg");
   const [caption, setCaption] = useState("");
   function handleSave() {
     if (caption && image) {
@@ -55,18 +53,32 @@ export default function Create() {
           ),
         }}
       />
-      <View style={styles.main}>
-        <Text style={styles.title}>Create</Text>
-        <Text style={styles.subtitle}>Create a new post.</Text>
-      </View>
+      {/* Add Image Component */}
+      <Text style={styles.imgText}>Image</Text>
+      <Image source={{ uri: image }} style={styles.image} />
+
+      {/* Add TextInput Component */}
+      <Text style={styles.imgText}>Caption</Text>
+      <TextInput
+        placeholder="Enter Caption"
+        style={styles.input}
+        value={caption}
+        onChangeText={(text) => setCaption(text)}
+      />
     </View>
   );
 }
 
+/*
+<View style={styles.main}>
+        <Text style={styles.title}>Create</Text>
+        <Text style={styles.subtitle}>Create a new post.</Text>
+      </View>
+      */
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
+    alignItems: "left",
     padding: 24,
   },
   main: {
@@ -82,5 +94,22 @@ const styles = StyleSheet.create({
   subtitle: {
     fontSize: 36,
     color: "#38434D",
+  },
+  imgText: {
+    fontSize: 25,
+  },
+  image: {
+    width: 350, // Adjust the width as needed
+    height: 350, // Adjust the height as needed
+    resizeMode: "cover", // You can change the resizeMode as needed
+    marginVertical: 20,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: "#264c59",
+    padding: 10,
+    fontSize: 18,
+    marginVertical: 10,
+    width: "100%",
   },
 });
