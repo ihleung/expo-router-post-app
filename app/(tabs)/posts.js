@@ -8,6 +8,19 @@ export default function Posts() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
+    /*async function getPosts() {
+      const response = await fetch(
+        "https://expo-post-app-8d5ed-default-rtdb.firebaseio.com/posts.json"
+      );
+      const dataObj = await response.json();
+      const postsArray = Object.keys(dataObj).map((key) => ({
+        id: key,
+        ...dataObj[key],
+      })); // from object to array
+      postsArray.sort((postA, postB) => postB.createdAt - postA.createdAt);
+      setPosts(postsArray);
+    }
+*/
     async function getPosts() {
       const response = await fetch(
         "https://expo-post-app-8d5ed-default-rtdb.firebaseio.com/posts.json"
@@ -20,7 +33,6 @@ export default function Posts() {
       postsArray.sort((postA, postB) => postB.createdAt - postA.createdAt);
       setPosts(postsArray);
     }
-
     getPosts();
   }, []);
 
