@@ -1,8 +1,38 @@
 import { Stack, useRouter } from "expo-router";
+import { useEffect, useState } from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
 
 export default function Create() {
   const router = useRouter();
+  const [image, setImage] = useState(
+    "https://www.pulsecarshalton.co.uk/wp-content/uploads/2016/08/jk-placeholder-image.jpg"
+  );
+  const [caption, setCaption] = useState("");
+  function handleSave() {
+    if (caption && image) {
+      createPost();
+    }
+  }
+
+  async function createPost() {
+    const createdAt = new Date().getTime();
+    const post = {
+      caption: caption,
+      image: image,
+      createdAt: createdAt,
+      uid: "fTs84KRoYw5pRZEWCq2Z",
+    };
+    const response = await fetch(
+      "https://expo-post-app-8d5ed-default-rtdb.firebaseio.com/posts.json",
+      {
+        method: "POST",
+        body: JSON.stringify(post),
+      }
+    );
+    if (response.ok) {
+      router.back();
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -14,6 +44,13 @@ export default function Create() {
               title="Close"
               color={Platform.OS === "ios" ? "#fff" : "#264c59"}
               onPress={() => router.back()}
+            />
+          ),
+          headerRight: () => (
+            <Button
+              title="Create"
+              color={Platform.OS === "ios" ? "#fff" : "#264c59"}
+              onPress={handleSave}
             />
           ),
         }}
