@@ -20,7 +20,6 @@ export default function Posts() {
       postsArray.sort((postA, postB) => postB.createdAt - postA.createdAt);
       setPosts(postsArray);
     }
-
     getPosts();
   }, []);
 
