@@ -1,4 +1,5 @@
 import { Image, StyleSheet, Text, View } from "react-native";
+import Avatar from "./Avatar";
 
 export default function PostListItem({ post }) {
   const createdAt = new Date(post.createdAt);
@@ -8,6 +9,9 @@ export default function PostListItem({ post }) {
   var fulldate = year + "-" + month + "-" + day;
   return (
     <View style={styles.postContainer}>
+      <View style={styles.headerContainer}>
+        <Avatar userId={post.uid} />
+      </View>
       <Image style={styles.postImage} source={{ uri: post.image }} />
       <Text style={styles.postCaption}>{post.caption}</Text>
       <Text style={styles.postCaption}>{fulldate}</Text>
@@ -31,5 +35,9 @@ const styles = StyleSheet.create({
   postCaption: {
     fontSize: 22,
     padding: 15,
+  },
+  headerContainer: {
+    alignItems: "center",
+    flexDirection: "row",
   },
 });
