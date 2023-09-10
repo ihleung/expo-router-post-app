@@ -5,7 +5,8 @@
       "bundler": "metro"
     },
     "name": "expo-post-app",
-    "slug": "expo-post-app"
+    "slug": "expo-post-app",
+    "orientation": "default"
   },
   "plugins": [
     [

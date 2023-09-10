@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Stack, useRouter } from "expo-router";
 import { useFocusEffect } from "@react-navigation/native"; // Import the useFocusEffect hook
-import { Button, FlatList, Platform, StyleSheet, View } from "react-native";
+import {
+  Button,
+  FlatList,
+  Platform,
+  StyleSheet,
+  View,
+  RefreshControl,
+} from "react-native";
 import PostListItem from "../components/PostListItem";
 
 // Define getPosts function outside of the component
@@ -21,6 +28,7 @@ async function getPosts(setPosts) {
 export default function Posts() {
   const router = useRouter();
   const [posts, setPosts] = useState([]);
+  const [refreshing, setRefreshing] = useState(false); // State to manage refreshing
 
   useEffect(() => {
     getPosts(setPosts); // Call the getPosts function here
@@ -32,6 +40,13 @@ export default function Posts() {
       getPosts(setPosts); // Call the getPosts function here as well
     }, [])
   );
+
+  // Define handleRefresh function
+  async function handleRefresh() {
+    setRefreshing(true); // Set refreshing to true
+    await getPosts(setPosts); // Call the getPosts function
+    setRefreshing(false); // Set refreshing to false
+  }
 
   function showCreateModal() {
     router.push("/create");
@@ -54,6 +69,13 @@ export default function Posts() {
         data={posts}
         renderItem={({ item }) => <PostListItem post={item} />}
         keyExtractor={(item) => item.id}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={handleRefresh}
+            tintColor="#264c59"
+          />
+        }
       />
     </View>
   );
