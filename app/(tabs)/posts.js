@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Stack, useRouter } from "expo-router";
-import { useEffect, useState } from "react";
 import { useFocusEffect } from "@react-navigation/native"; // Import the useFocusEffect hook
 import { Button, FlatList, Platform, StyleSheet, View } from "react-native";
 import PostListItem from "../components/PostListItem";
 
+// Define getPosts function outside of the component
 async function getPosts(setPosts) {
   const response = await fetch(
     "https://expo-post-app-8d5ed-default-rtdb.firebaseio.com/posts.json"
@@ -17,18 +17,19 @@ async function getPosts(setPosts) {
   postsArray.sort((postA, postB) => postB.createdAt - postA.createdAt);
   setPosts(postsArray);
 }
+
 export default function Posts() {
   const router = useRouter();
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    getPosts(setPosts);
+    getPosts(setPosts); // Call the getPosts function here
   }, []);
 
   // Use the useFocusEffect hook to fetch posts when the screen is focused
   useFocusEffect(
     React.useCallback(() => {
-      getPosts(setPosts);
+      getPosts(setPosts); // Call the getPosts function here as well
     }, [])
   );
 
