@@ -1,10 +1,21 @@
 import { Stack, useRouter } from "expo-router";
 import { useState } from "react";
-import { StyleSheet, Text, View, Button, Image, TextInput } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  Image,
+  TextInput,
+  TouchableOpacity,
+} from "react-native";
+import * as ImagePicker from "expo-image-picker";
 
 export default function Create() {
   const router = useRouter();
-  const [image, setImage] = useState("https://i.imgur.com/X3ctv3i.jpg");
+  const [image, setImage] = useState(
+    "https://www.pulsecarshalton.co.uk/wp-content/uploads/2016/08/jk-placeholder-image.jpg"
+  );
   const [caption, setCaption] = useState("");
   function handleSave() {
     if (caption && image) {
@@ -32,6 +43,20 @@ export default function Create() {
     }
   }
 
+  async function chooseImage() {
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      base64: true,
+      allowsEditing: true,
+      quality: 0.3,
+    });
+
+    if (!result.canceled) {
+      const base64 = "data:image/jpeg;base64," + result.assets[0].base64;
+      setImage(base64);
+    }
+  }
+
   return (
     <View style={styles.container}>
       <Stack.Screen
@@ -55,7 +80,9 @@ export default function Create() {
       />
       {/* Add Image Component */}
       <Text style={styles.imgText}>Image</Text>
-      <Image source={{ uri: image }} style={styles.image} />
+      <TouchableOpacity onPress={chooseImage}>
+        <Image style={styles.image} source={{ uri: image }} />
+      </TouchableOpacity>
 
       {/* Add TextInput Component */}
       <Text style={styles.imgText}>Caption</Text>

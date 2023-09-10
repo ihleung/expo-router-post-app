@@ -4,10 +4,16 @@
     "web": {
       "bundler": "metro"
     },
-    "plugins": [
-      "expo-router"
-    ],
-    "name": "expo-router-firebase-database",
-    "slug": "expo-router-firebase-database"
-  }
+    "name": "expo-post-app",
+    "slug": "expo-post-app"
+  },
+  "plugins": [
+    [
+      "expo-image-picker",
+      {
+        "photosPermission": "The app accesses your photos to let you share them with your friends."
+      }
+    ]
+  ]
 }
+// "plugins": ["expo-router"],
