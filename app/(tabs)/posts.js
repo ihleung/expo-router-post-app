@@ -43,9 +43,9 @@ export default function Posts() {
 
   // Define handleRefresh function
   async function handleRefresh() {
-    setRefreshing(true); // Set refreshing to true
-    await getPosts(setPosts); // Call the getPosts function
-    setRefreshing(false); // Set refreshing to false
+    setRefreshing(true); // Update refreshing to true
+    await getPosts(setPosts); // Call getPosts function
+    setRefreshing(false); // Update refreshing to false
   }
 
   function showCreateModal() {
