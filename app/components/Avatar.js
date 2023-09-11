@@ -1,58 +1,65 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, Image, StyleSheet } from "react-native";
+import { useEffect, useState } from "react";
+import { Image, StyleSheet, Text, View } from "react-native";
 
-const Avatar = ({ userId }) => {
-  const [user, setUser] = useState(null);
+export default function Avatar({ userId }) {
+  const [user, setUser] = useState([]);
 
   useEffect(() => {
-    // Function to fetch user data from Firebase
-    const fetchUser = async () => {
-      try {
-        const response = await fetch(
-          "https://expo-post-app-8d5ed-default-rtdb.firebaseio.com/users.json"
-        );
-        if (!response.ok) {
-          throw new Error("User not found.");
-        }
-        const userData = await response.json();
-        setUser(userData);
-      } catch (error) {
-        console.error("Error fetching user:", error);
-      }
-    };
-
-    if (userId) {
-      fetchUser();
+    async function getUser() {
+      const response = await fetch(
+        "https://expo-post-app-default-rtdb.firebaseio.com/users/" +
+          userId +
+          ".json"
+      );
+      const data = await response.json();
+      setUser(data);
     }
+    getUser();
   }, [userId]);
 
   return (
-    <View style={styles.container}>
-      {user ? (
-        <>
-          <Image style={styles.avatar} source={{ uri: user.image }} />
-          <Text style={styles.username}>{user.name}</Text>
-        </>
-      ) : (
-        <Text>Loading...</Text>
-      )}
+    <View style={styles.avatarContainer}>
+      <View style={styles.avatarImageContainer}>
+        <Image style={styles.avatarImage} source={{ uri: user.image }} />
+      </View>
+      <View>
+        <Text style={styles.avatarName}>{user.name}</Text>
+        <Text style={styles.avatarTitle}>{user.title}</Text>
+      </View>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
-  container: {
-    flexDirection: "row",
+  avatarContainer: {
     alignItems: "center",
+    flexDirection: "row",
+    paddingVertical: 8,
+    paddingHorizontal: 12,
   },
-  avatar: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    marginRight: 10,
+  avatarImageContainer: {
+    alignItems: "center",
+    borderRadius: 55 / 2,
+    borderWidth: 3,
+    borderColor: "#264c59",
+    display: "flex",
+    height: 55,
+    justifyContent: "center",
+    marginRight: 12,
+    width: 55,
   },
-  username: {
-    fontSize: 16,
+  avatarImage: {
+    borderRadius: 42 / 2,
+    height: 45,
+    width: 45,
+  },
+  avatarName: {
+    fontSize: 17,
     fontWeight: "bold",
+    marginRight: 12,
+  },
+  avatarTitle: {
+    fontSize: 13,
+    marginRight: 12,
   },
 });
