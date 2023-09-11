@@ -7,7 +7,7 @@ export default function Avatar({ userId }) {
   useEffect(() => {
     async function getUser() {
       const response = await fetch(
-        "https://expo-post-app-default-rtdb.firebaseio.com/users/" +
+        "https://expo-post-app-8d5ed-default-rtdb.firebaseio.com/users/" +
           userId +
           ".json"
       );

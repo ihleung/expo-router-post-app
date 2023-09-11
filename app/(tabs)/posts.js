@@ -11,41 +11,43 @@ import {
 } from "react-native";
 import PostListItem from "../components/PostListItem";
 
-// Define getPosts function outside of the component
-async function getPosts(setPosts) {
-  const response = await fetch(
-    "https://expo-post-app-8d5ed-default-rtdb.firebaseio.com/posts.json"
-  );
-  const dataObj = await response.json();
-  const postsArray = Object.keys(dataObj).map((key) => ({
-    id: key,
-    ...dataObj[key],
-  })); // from object to array
-  postsArray.sort((postA, postB) => postB.createdAt - postA.createdAt);
-  setPosts(postsArray);
-}
-
 export default function Posts() {
   const router = useRouter();
   const [posts, setPosts] = useState([]);
   const [refreshing, setRefreshing] = useState(false); // State to manage refreshing
 
   useEffect(() => {
-    getPosts(setPosts); // Call the getPosts function here
+    getPosts(); // Call the getPosts function here
   }, []);
 
   // Use the useFocusEffect hook to fetch posts when the screen is focused
   useFocusEffect(
     React.useCallback(() => {
-      getPosts(setPosts); // Call the getPosts function here as well
+      getPosts(); // Call the getPosts function here as well
     }, [])
   );
 
+  // Define getPosts function outside of the component
+  async function getPosts() {
+    const response = await fetch(
+      "https://expo-post-app-8d5ed-default-rtdb.firebaseio.com/posts.json"
+    );
+    const dataObj = await response.json();
+    const postsArray = Object.keys(dataObj).map((key) => ({
+      id: key,
+      ...dataObj[key],
+    })); // from object to array
+    postsArray.sort((postA, postB) => postB.createdAt - postA.createdAt);
+    setPosts(postsArray);
+  }
+
   // Define handleRefresh function
   async function handleRefresh() {
-    setRefreshing(true); // Update refreshing to true
-    await getPosts(setPosts); // Call getPosts function
-    setRefreshing(false); // Update refreshing to false
+    setRefreshing(true);
+    await getPosts();
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 500);
   }
 
   function showCreateModal() {
@@ -67,7 +69,9 @@ export default function Posts() {
       />
       <FlatList
         data={posts}
-        renderItem={({ item }) => <PostListItem post={item} />}
+        renderItem={({ item }) => (
+          <PostListItem post={item} reload={getPosts} />
+        )}
         keyExtractor={(item) => item.id}
         refreshControl={
           <RefreshControl
