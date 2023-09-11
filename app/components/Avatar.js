@@ -1,52 +1,57 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, Image, StyleSheet } from "react-native";
 
-// Define a function to fetch the user based on userId
-async function fetchUser(userId, setUser) {
-  try {
-    const response = await fetch(
-      "https://expo-post-app-8d5ed-default-rtdb.firebaseio.com/users.json"
-    );
-    const userData = await response.json();
-    setUser(userData);
-  } catch (error) {
-    console.error("Error fetching user:", error);
-  }
-}
-
-export default function Avatar({ userId }) {
+const Avatar = ({ userId }) => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
+    // Function to fetch user data from Firebase
+    const fetchUser = async () => {
+      try {
+        const response = await fetch(
+          "https://expo-post-app-8d5ed-default-rtdb.firebaseio.com/users.json"
+        );
+        if (!response.ok) {
+          throw new Error("User not found.");
+        }
+        const userData = await response.json();
+        setUser(userData);
+      } catch (error) {
+        console.error("Error fetching user:", error);
+      }
+    };
+
     if (userId) {
-      fetchUser(userId, setUser);
+      fetchUser();
     }
   }, [userId]);
 
-  // Render the user's avatar and name
   return (
     <View style={styles.container}>
-      {user && (
+      {user ? (
         <>
-          <Image source={{ uri: user.avatar }} style={styles.avatar} />
-          <Text style={styles.name}>{user.name}</Text>
+          <Image style={styles.avatar} source={{ uri: user.image }} />
+          <Text style={styles.username}>{user.name}</Text>
         </>
+      ) : (
+        <Text>Loading...</Text>
       )}
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
+    flexDirection: "row",
     alignItems: "center",
   },
   avatar: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    marginRight: 10,
   },
-  name: {
-    marginTop: 5,
+  username: {
     fontSize: 16,
     fontWeight: "bold",
   },

@@ -9,6 +9,9 @@ export default function PostListItem({ post }) {
   var fulldate = year + "-" + month + "-" + day;
   return (
     <View style={styles.postContainer}>
+      <View style={styles.headerContainer}>
+        <Avatar userId={post.uid} />
+      </View>
       <Image style={styles.postImage} source={{ uri: post.image }} />
       <Text style={styles.postCaption}>{post.caption}</Text>
       <Text style={styles.postCaption}>{fulldate}</Text>
