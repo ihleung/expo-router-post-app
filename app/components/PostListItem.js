@@ -6,6 +6,7 @@ import {
   View,
   TouchableOpacity,
 } from "react-native";
+import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useActionSheet } from "@expo/react-native-action-sheet";
 import Avatar from "./Avatar";
@@ -13,6 +14,7 @@ import Avatar from "./Avatar";
 export default function PostListItem({ post, reload }) {
   const { showActionSheetWithOptions } = useActionSheet();
   const createdAt = new Date(post.createdAt);
+  const router = useRouter();
   var year = createdAt.toLocaleString("default", { year: "numeric" });
   var month = createdAt.toLocaleString("default", { month: "2-digit" });
   var day = createdAt.toLocaleString("default", { day: "2-digit" });
@@ -50,6 +52,7 @@ export default function PostListItem({ post, reload }) {
   }
 
   function showUpdateModal() {
+    console.log("Hoola");
     router.push({ pathname: "/post-modal", params: { id: post.id } });
   }
 

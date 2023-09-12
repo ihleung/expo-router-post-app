@@ -1,15 +1,16 @@
-import { Stack, useRouter } from "expo-router";
-import { useState } from "react";
+import * as ImagePicker from "expo-image-picker";
+import { Stack, useRouter, useSearchParams } from "expo-router";
+import { useEffect, useState } from "react";
 import {
-  StyleSheet,
-  Text,
-  View,
   Button,
   Image,
+  Platform,
+  StyleSheet,
+  Text,
   TextInput,
   TouchableOpacity,
+  View,
 } from "react-native";
-import * as ImagePicker from "expo-image-picker";
 
 export default function PostModal() {
   const { id } = useSearchParams();
@@ -117,7 +118,12 @@ export default function PostModal() {
       {/* Add Image Component */}
       <Text style={styles.imgText}>Image</Text>
       <TouchableOpacity onPress={chooseImage}>
-        <Image style={styles.image} source={{ uri: image }} />
+        <Image
+          style={styles.image}
+          source={{
+            uri: "https://www.pulsecarshalton.co.uk/wp-content/uploads/2016/08/jk-placeholder-image.jpg",
+          }}
+        />
       </TouchableOpacity>
 
       {/* Add TextInput Component */}
