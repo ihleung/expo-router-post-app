@@ -9,12 +9,9 @@ export default function AppLayout() {
         <StatusBar style="light" />
 
         <Stack>
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen
             name="(modals)/post-modal"
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="(modals)/create"
             options={{
               presentation: "modal",
               headerTintColor: "#fff",

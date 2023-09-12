@@ -38,7 +38,8 @@ export default function PostModal() {
       if (id) {
         updatePost();
       } else {
-      createPost();
+        createPost();
+      }
     }
   }
 
