@@ -59,6 +59,22 @@ export default function PostModal() {
     }
   }
 
+  async function updatePost() {
+    const post = { caption: caption, image: image };
+    const response = await fetch(
+      "https://expo-post-app-8d5ed-default-rtdb.firebaseio.com/posts/" +
+        id +
+        ".json",
+      {
+        method: "PATCH",
+        body: JSON.stringify(post),
+      }
+    );
+    if (response.ok) {
+      router.back();
+    }
+  }
+
   async function chooseImage() {
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
