@@ -10,6 +10,8 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
 } from "react-native";
 
 export default function PostModal() {
@@ -129,6 +131,7 @@ export default function PostModal() {
       </TouchableOpacity>
 
       {/* Add TextInput Component */}
+
       <Text style={styles.imgText}>Caption</Text>
       <TextInput
         placeholder="Enter Caption"
