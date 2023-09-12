@@ -100,7 +100,7 @@ export default function PostModal() {
     <View style={styles.container}>
       <Stack.Screen
         options={{
-          title: "Create New Post",
+          title: id ? "Update Post" : "Create New Post",
           headerLeft: () => (
             <Button
               title="Close"
@@ -118,6 +118,7 @@ export default function PostModal() {
         }}
       />
       {/* Add Image Component */}
+
       <Text style={styles.imgText}>Image</Text>
       <TouchableOpacity onPress={chooseImage}>
         <Image
