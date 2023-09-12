@@ -49,7 +49,9 @@ export default function PostListItem({ post, reload }) {
     );
   }
 
-  function showUpdateModal() {}
+  function showUpdateModal() {
+    router.push({ pathname: "/post-modal", params: { id: post.id } });
+  }
 
   function showDeleteDialog() {
     Alert.alert(

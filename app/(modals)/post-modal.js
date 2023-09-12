@@ -11,12 +11,28 @@ import {
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 
-export default function Create() {
+export default function PostModal() {
+  const { id } = useSearchParams();
   const router = useRouter();
-  const [image, setImage] = useState(
-    "https://www.pulsecarshalton.co.uk/wp-content/uploads/2016/08/jk-placeholder-image.jpg"
-  );
   const [caption, setCaption] = useState("");
+  const [image, setImage] = useState("");
+
+  useEffect(() => {
+    async function getPost() {
+      const response = await fetch(
+        "https://expo-post-app-8d5ed-default-rtdb.firebaseio.com/posts/" +
+          id +
+          ".json"
+      );
+      const data = await response.json();
+      setImage(data.image);
+      setCaption(data.caption);
+    }
+    if (id) {
+      getPost();
+    }
+  }, [id]);
+
   function handleSave() {
     if (caption && image) {
       createPost();
