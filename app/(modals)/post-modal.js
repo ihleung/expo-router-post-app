@@ -131,7 +131,6 @@ export default function PostModal() {
       </TouchableOpacity>
 
       {/* Add TextInput Component */}
-
       <Text style={styles.imgText}>Caption</Text>
       <TextInput
         placeholder="Enter Caption"
