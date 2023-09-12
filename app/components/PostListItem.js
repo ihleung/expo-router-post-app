@@ -52,7 +52,6 @@ export default function PostListItem({ post, reload }) {
   }
 
   function showUpdateModal() {
-    console.log("Hoola");
     router.push({ pathname: "/post-modal", params: { id: post.id } });
   }
 
