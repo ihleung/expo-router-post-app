@@ -121,7 +121,9 @@ export default function PostModal() {
         <Image
           style={styles.image}
           source={{
-            uri: "https://www.pulsecarshalton.co.uk/wp-content/uploads/2016/08/jk-placeholder-image.jpg",
+            uri:
+              image ||
+              "https://www.pulsecarshalton.co.uk/wp-content/uploads/2016/08/jk-placeholder-image.jpg",
           }}
         />
       </TouchableOpacity>
