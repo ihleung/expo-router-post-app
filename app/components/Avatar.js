@@ -3,14 +3,11 @@ import { Image, StyleSheet, Text, View } from "react-native";
 
 export default function Avatar({ userId }) {
   const [user, setUser] = useState([]);
+  const API_URL = "https://expo-post-app-8d5ed-default-rtdb.firebaseio.com";
 
   useEffect(() => {
     async function getUser() {
-      const response = await fetch(
-        "https://expo-post-app-8d5ed-default-rtdb.firebaseio.com/users/" +
-          userId +
-          ".json"
-      );
+      const response = await fetch(`${API_URL}/users/${userId}.json`);
       const data = await response.json();
       setUser(data);
     }
