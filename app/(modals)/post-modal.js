@@ -37,12 +37,10 @@ export default function PostModal() {
   }, [id]);
 
   function handleSave() {
-    if (caption && image) {
-      if (id) {
-        updatePost();
-      } else {
-        createPost();
-      }
+    if (id) {
+      updatePost();
+    } else {
+      createPost();
     }
   }
 

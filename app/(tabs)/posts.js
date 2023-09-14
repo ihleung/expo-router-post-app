@@ -37,7 +37,7 @@ export default function Posts() {
       id: key,
       ...dataObj[key],
     })); // from object to array
-    postsArray.sort((postA, postB) => postB.createdAt - postA.createdAt);
+    postsArray.sort((postA, postB) => postB.createdAt - postA.createdAt); // sort by timestamp/ createdBy
     setPosts(postsArray);
   }
 
