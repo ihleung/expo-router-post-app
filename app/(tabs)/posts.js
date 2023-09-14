@@ -33,7 +33,7 @@ export default function Posts() {
       "https://expo-post-app-8d5ed-default-rtdb.firebaseio.com/posts.json"
     );
     const dataObj = await response.json();
-    const postsArray = Object.keys(dataObj).map((key => ({
+    const postsArray = Object.keys(dataObj).map((key) => ({
       id: key,
       ...dataObj[key],
     })); // from object to array
