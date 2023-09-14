@@ -19,14 +19,11 @@ export default function PostModal() {
   const router = useRouter();
   const [caption, setCaption] = useState("");
   const [image, setImage] = useState("");
+  const API_URL = "https://expo-post-app-8d5ed-default-rtdb.firebaseio.com";
 
   useEffect(() => {
     async function getPost() {
-      const response = await fetch(
-        "https://expo-post-app-default-rtdb.firebaseio.com/posts/" +
-          id +
-          ".json"
-      );
+      const response = await fetch(`${API_URL}/posts/${id}.json`);
       const data = await response.json();
       setImage(data.image);
       setCaption(data.caption);

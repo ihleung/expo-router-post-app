@@ -19,6 +19,7 @@ export default function PostListItem({ post, reload }) {
   var month = createdAt.toLocaleString("default", { month: "2-digit" });
   var day = createdAt.toLocaleString("default", { day: "2-digit" });
   var fulldate = year + "-" + month + "-" + day;
+  const API_URL = "https://expo-post-app-8d5ed-default-rtdb.firebaseio.com";
 
   function showEditMenu() {
     const options = ["Update Post", "Delete Post", "Cancel"];
@@ -70,12 +71,9 @@ export default function PostListItem({ post, reload }) {
   }
 
   async function deletePost() {
-    const response = await fetch(
-      "https://expo-post-app-default-rtdb.firebaseio.com/posts/" +
-        post.id +
-        ".json",
-      { method: "DELETE" }
-    );
+    const response = await fetch(`${API_URL}/posts/${post.id}.json`, {
+      method: "DELETE",
+    });
     if (response.ok) {
       console.log("Post deleted!");
       reload();

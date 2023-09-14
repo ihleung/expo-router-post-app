@@ -15,6 +15,7 @@ export default function Posts() {
   const router = useRouter();
   const [posts, setPosts] = useState([]);
   const [refreshing, setRefreshing] = useState(false); // State to manage refreshing
+  const API_URL = "https://expo-post-app-8d5ed-default-rtdb.firebaseio.com";
 
   useEffect(() => {
     getPosts(); // Call the getPosts function here
@@ -29,9 +30,7 @@ export default function Posts() {
 
   // Define getPosts function outside of the component
   async function getPosts() {
-    const response = await fetch(
-      "https://expo-post-app-default-rtdb.firebaseio.com/posts.json"
-    );
+    const response = await fetch(`${API_URL}/posts.json`);
     const dataObj = await response.json();
     const postsArray = Object.keys(dataObj).map((key) => ({
       id: key,
