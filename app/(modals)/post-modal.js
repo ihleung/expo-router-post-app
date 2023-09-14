@@ -23,7 +23,7 @@ export default function PostModal() {
   useEffect(() => {
     async function getPost() {
       const response = await fetch(
-        "https://expo-post-app-8d5ed-default-rtdb.firebaseio.com/posts/" +
+        "https://expo-post-app-default-rtdb.firebaseio.com/posts/" +
           id +
           ".json"
       );

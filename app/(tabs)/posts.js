@@ -30,7 +30,7 @@ export default function Posts() {
   // Define getPosts function outside of the component
   async function getPosts() {
     const response = await fetch(
-      "https://expo-post-app-8d5ed-default-rtdb.firebaseio.com/posts.json"
+      "https://expo-post-app-default-rtdb.firebaseio.com/posts.json"
     );
     const dataObj = await response.json();
     const postsArray = Object.keys(dataObj).map((key) => ({

@@ -5,7 +5,7 @@ import User from "../../components/User";
 export default function Users() {
   const [users, setUsers] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
-  const API_URL = "https://expo-post-app-8d5ed-default-rtdb.firebaseio.com";
+  const API_URL = "https://expo-post-app-default-rtdb.firebaseio.com";
 
   useEffect(() => {
     getUsers();

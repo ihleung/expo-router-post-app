@@ -8,7 +8,7 @@ export default function UserDetails() {
   const { id } = useLocalSearchParams();
   const [user, setUser] = useState([]);
   const [posts, setPosts] = useState([]);
-  const API_URL = "https://expo-post-app-8d5ed-default-rtdb.firebaseio.com";
+  const API_URL = "https://expo-post-app-default-rtdb.firebaseio.com";
 
   useEffect(() => {
     getUser();

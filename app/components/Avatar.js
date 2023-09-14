@@ -3,8 +3,8 @@ import { Image, StyleSheet, Text, View } from "react-native";
 import React from "react";
 
 export default function Avatar({ userId }) {
-  const [user, setUser] = useState([null]);
-  const API_URL = "https://expo-post-app-8d5ed-default-rtdb.firebaseio.com";
+  const [user, setUser] = useState([]);
+  const API_URL = "https://expo-post-app-default-rtdb.firebaseio.com";
 
   useEffect(() => {
     async function getUser() {

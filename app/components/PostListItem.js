@@ -71,7 +71,7 @@ export default function PostListItem({ post, reload }) {
 
   async function deletePost() {
     const response = await fetch(
-      "https://expo-post-app-8d5ed-default-rtdb.firebaseio.com/posts/" +
+      "https://expo-post-app-default-rtdb.firebaseio.com/posts/" +
         post.id +
         ".json",
       { method: "DELETE" }
