@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
-import React from "react";
 
 export default function Avatar({ userId }) {
   const [user, setUser] = useState([]);
@@ -18,11 +17,11 @@ export default function Avatar({ userId }) {
   return (
     <View style={styles.avatarContainer}>
       <View style={styles.avatarImageContainer}>
-        <Image style={styles.avatarImage} source={{ uri: user.image }} />
+        <Image style={styles.avatarImage} source={{ uri: user?.image }} />
       </View>
       <View>
-        <Text style={styles.avatarName}>{user.name}</Text>
-        <Text style={styles.avatarTitle}>{user.title}</Text>
+        <Text style={styles.avatarName}>{user?.name}</Text>
+        <Text style={styles.avatarTitle}>{user?.title}</Text>
       </View>
     </View>
   );
