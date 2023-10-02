@@ -14,4 +14,4 @@ npx create-expo-app -e with-router
 
 -using ios simulator and web browser
 
--using Firebase
+-database i am using is the call firebase
